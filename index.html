@@ -1,0 +1,105 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html>
+<head>
+  <title>Serial (COM-port) to WWW proxy</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+  
+    <style type="text/css">
+    html, body {
+        height: 100%;
+        margin: 0px;
+    }
+    body {
+        background: #f0e68c;
+    }
+  </style>
+
+  <script>
+    function setBackgroundColor(color) {
+        document.getElementById("body").style.background = color;
+    }
+
+    function setForegroundColor(color) {
+        document.getElementById("data").style.color = color;
+    }
+
+    function setFontSize(size) {
+        document.getElementById("data").style.fontSize = size;
+    }
+    
+  </script>
+  
+    <script>
+        function on_load(responseTxt, statusTxt, xhr){
+            if( statusTxt == "success" ){
+                $("#data").load("/get_serial?r=" + Math.random(), on_load )
+            } else {
+                $("#data").text( "Error: " + xhr.status + ": " + xhr.statusText );
+            }
+        }
+        $(document).ready(function(){
+                on_load("", "success", 3);
+            });
+        
+    </script>
+  
+  
+</head>
+
+<body id="body">
+  <!-- Vertical aligment of text from "Vertical Centering in CSS" at 
+  http://www.jakpsatweb.cz/css/css-vertical-center-solution.html -->
+  <div style="display: table; height: 90%; width: 100%; overflow: hidden;">
+    <div style=" display: table-cell; vertical-align: middle;">
+      <div style="text-align: center" id="data">
+        Пока нет данных
+      </div>
+    </div>
+  </div>
+
+  <div style="display: table; height: 10%; width: 100%">
+    <div style=" display: table-cell; vertical-align: middle;">
+        <div>
+            <div class="container">
+                <div class="btn-group dropup">
+                    <div class="btn-group">
+                      <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Цвет фона
+                      <span class="caret"></span></button>
+                      <ul class="dropdown-menu">
+                        <li><a data-target="#" onclick="setBackgroundColor('red')">red</a></li>
+                        <li><a data-target="#" onclick="setBackgroundColor('green')">green</a></li>
+                        <li><a data-target="#" onclick="setBackgroundColor('blue')">blue</a></li>
+                      </ul>
+                    </div>
+
+                    <div class="btn-group">
+                      <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Цвет шрифта
+                      <span class="caret"></span></button>
+                      <ul class="dropdown-menu">
+                        <li><a data-target="#" onclick="setForegroundColor('white')">white</a></li>
+                        <li><a data-target="#" onclick="setForegroundColor('black')">black</a></li>
+                      </ul>
+                    </div>
+
+                    <div class="btn-group">
+                      <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Размер шрифта
+                      <span class="caret"></span></button>
+                      <ul class="dropdown-menu">
+                        <li><a data-target="#" onclick="setFontSize('25px')">25px</a></li>
+                        <li><a data-target="#" onclick="setFontSize('15px')">15px</a></li>
+                      </ul>
+                    </div>
+
+                </div>
+            </div>
+            
+        </div>
+    </div>
+  </div>
+  
+</body>
+</html>

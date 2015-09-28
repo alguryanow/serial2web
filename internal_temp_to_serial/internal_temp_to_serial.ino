@@ -20,12 +20,7 @@ void setup() {
 int count = 0;
 
 void loop() {
-  //Serial.println( readTemp(), DEC );
-  String s = String(count++, DEC) + ": " + String( readTemp(), DEC );
-  for(int i=0; i < s.length(); i++ ){
-    Serial.print( s.charAt(i) );
-    delay( 200 );
-  }
-  Serial.println("");
-  delay(1000);
+  String s = "Температура: " + String( readTemp(), DEC );
+  Serial.println( s );
+  delay( 200 );
 }
